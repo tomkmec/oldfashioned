@@ -1,5 +1,6 @@
 {
   "name": "oldfashioned-webapp",
+  "homepage": "https://tomkmec.github.io/oldfashioned",
   "version": "0.1.0",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
