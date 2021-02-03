@@ -25,15 +25,15 @@ jobs:
       - uses: actions/checkout@v2
 
       - run: npm install
-        working-directory: webapp/app
+        working-directory: webapp
 
       - run: yarn build
-        working-directory: webapp/app
+        working-directory: webapp
         
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: webapp/app/build # The folder the action should deploy.
+          FOLDER: webapp/build # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
