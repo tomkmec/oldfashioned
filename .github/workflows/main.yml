@@ -25,10 +25,10 @@ jobs:
       - uses: actions/checkout@v2
 
       - run: npm install
-        working-directory: webapp
+        working-directory: webapp/app
 
       - run: yarn build
-        working-directory: webapp
+        working-directory: webapp/app
         
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
