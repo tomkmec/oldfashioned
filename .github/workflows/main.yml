@@ -24,7 +24,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - run: install # will run `yarn install` command
+      - run: npm install
         working-directory: webapp
 
       - run: yarn build
