@@ -52,8 +52,7 @@ export interface Suggestion {
 export interface PlaylistEntry {
   entry: Entry
   sourceId: string;
-  sourcePlugin: SourcePlugin;
-  sourceIconURL?: string;
+  metadata: SourceMetadata;
   showInPlaylist: boolean;
 }
 
@@ -94,24 +93,26 @@ export class CIRangeSlider implements ConfigurationItem<[number, number]> {
   constructor(readonly key: string, readonly defaultLabel: string, public readonly min: number, public readonly max: number, readonly defaultDescription?: string) {}
 }
 
-
-export interface SourcePlugin {
+export interface SourceMetadata {
   id: string;
   name: string;
   description: string;
   requiredPlayerCapabilities: string[];
   iconURL: string;
   
-  getInstance(sourceConfiguration: any, id: string): Promise<Source>;
-
   sourceConfigurationItems: ConfigurationItem<any>[];
 
   defaultSceneConfiguration: Partial<Record<string, object>>;
 }
 
+export interface SourcePlugin {
+  metadata: SourceMetadata;
+  getInstance(sourceConfiguration: any, id: string): Promise<Source>;
+}
+
 export interface Source {
   id: string;
-  plugin: SourcePlugin;
+  metadata: SourceMetadata;
   sensitiveContent: boolean;
   timeSensitive: boolean; // can generate a time-sensitive (breaking) content, such as news, stock muves, reminders
   coreContent: boolean; // can generate core content such as music or podcasts
@@ -137,15 +138,19 @@ export interface PlayerInitializationReqiurements {
 export interface PlayerInitializationResults {
 }
 
-export interface PlayerPlugin {
+export interface PlayerMetadata {
   id: string;
   name: string;
   capabilities: string[];
+}
+
+export interface PlayerPlugin {
+  metadata: PlayerMetadata;
   getInstance(requirements: PlayerInitializationReqiurements[], configuration: any): Promise<Player>;
 }
 
 export interface Player {
-  playerPlugin: PlayerPlugin;
+  playerMetadata: PlayerMetadata;
   initializationResults: PlayerInitializationResults;
   onStatusChange: (listener: (paused: boolean, pos?: number) => void) => void;
   play(track: Track, onFinish: Function): void;

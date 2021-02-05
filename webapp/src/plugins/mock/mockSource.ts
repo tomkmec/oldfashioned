@@ -1,13 +1,15 @@
 import {SourcePlugin, Source, PlayerInitializationReqiurements, PlayedPlaylistEntry, Suggestion, PlaylistEntry} from '../api';
 
 const MockSourcePlugin: SourcePlugin = {
-  id: 'of.source.mock',
-  name: 'Mock Source',
-  description: 'Some random items for playlist',
-  iconURL: 'https://via.placeholder.com/150',
-  requiredPlayerCapabilities: ['mock'],
-  sourceConfigurationItems: [],
-  defaultSceneConfiguration: {},
+  metadata: {
+    id: 'of.source.mock',
+    name: 'Mock Source',
+    description: 'Some random items for playlist',
+    iconURL: 'https://via.placeholder.com/150',
+    requiredPlayerCapabilities: ['mock'],
+    sourceConfigurationItems: [],
+    defaultSceneConfiguration: {}
+  },
   getInstance: async (sourceConfig: any, id: string) => {
     return new MockSource(id);
   }
@@ -15,7 +17,7 @@ const MockSourcePlugin: SourcePlugin = {
 
 class MockSource implements Source {
   coreContent = true;
-  plugin = MockSourcePlugin;
+  metadata = MockSourcePlugin.metadata;
   playerInitializationRequirements = {} as PlayerInitializationReqiurements;
   sensitiveContent = false;
   timeSensitive = false;
