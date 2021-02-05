@@ -16,11 +16,11 @@ import {createStation} from './station'
 
 import thunkMiddleware from 'redux-thunk'
 
-
 async function init() {
   const storedState = await persistence.loadState();
-  const player = createStation(storedState);
-  _inject(player)
+  const station = createStation(storedState);
+  
+  _inject(station)
   
   const store = configureStore({
     reducer: rootReducer,

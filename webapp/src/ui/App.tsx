@@ -4,14 +4,15 @@ import logo from '../logo.svg';
 import './App.css';
 import State from '../state'
 
-import { togglePlay } from './main/PlaylistActions'
+import { togglePlay, toggleFav } from './main/PlaylistActions'
 
 const mapState = (state: State) => ({
   playing: state.nowPlaying.playing
 })
 
 const mapDispatch = {
-  togglePlay: togglePlay
+  togglePlay: togglePlay,
+  toggleFav: toggleFav
 }
 
 const connector = connect(mapState, mapDispatch)
@@ -37,6 +38,7 @@ function App(props: Props) {
           Learn React
         </a>
         <button onClick={props.togglePlay} >{props.playing?'>':'||'}</button>
+        <button onClick={() => props.toggleFav('1')} >&lt;3</button>
       </header>
     </div>
   );

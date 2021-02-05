@@ -18,7 +18,10 @@ export const clearPlaylist = createAction("playlist/clear");
 export const replacePlaylist = createAction<PlaylistEntry[]>("playlist/replaceAll");
 export const appendPlaylist = createAction<PlaylistEntry[]>("playlist/appendAll");
 export const removeFromPlaylist = createAction<string>("playlist/remove");
-export const toggleFavorite = createAction<string>("playlist/toggleFav");
+
+export const toggleFav = createAsyncThunk("playlist/toggleFav", async (id: string) => {
+  return station.toggleFav(id)
+});
 
 export const togglePlay = createAsyncThunk("playlist/togglePlay", async () => {
   return station.togglePlay()

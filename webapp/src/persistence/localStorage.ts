@@ -1,16 +1,15 @@
-import State, { emptyState } from '../state'
-import * as log from 'loglevel';
+import { emptyState } from '../state'
 
 const key = "oldfashioned/state"
 
-export default {
+const storage = {
   loadState: () => { 
     const serializedState = localStorage.getItem(key);
     if (serializedState !== null) {
       try {
         return JSON.parse(serializedState);
       } catch (e) {
-        log.error(
+        console.error(
           `Failed to parse previously saved state from local storage. 
           Corrupted, or the format might have changed.
           Saving the state as '${key}-debug' for reference/debug`);
@@ -20,3 +19,5 @@ export default {
     return emptyState;
   }
 }
+
+export default storage
