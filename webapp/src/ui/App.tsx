@@ -1,24 +1,17 @@
 import React from 'react';
-import { connect, ConnectedProps, useDispatch } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import logo from '../logo.svg';
 import './App.css';
 import State from '../state'
 
-import {play} from './main/PlaylistActions'
-import { createAsyncThunk } from '@reduxjs/toolkit';
-
-const playThunk = createAsyncThunk('station/play', async() => {
-  console.log('p')
-  //player.play()
-})
+import { togglePlay } from './main/PlaylistActions'
 
 const mapState = (state: State) => ({
-  paused: state.nowPlaying.paused
+  playing: state.nowPlaying.playing
 })
 
 const mapDispatch = {
-  play: () => ({ type: play.type }),
-  play2: playThunk
+  togglePlay: togglePlay
 }
 
 const connector = connect(mapState, mapDispatch)
@@ -28,8 +21,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 type Props = PropsFromRedux & {}
 
 function App(props: Props) {
-  const dispatch = useDispatch();
-  
   return (
     <div className="App">
       <header className="App-header">
@@ -45,7 +36,7 @@ function App(props: Props) {
         >
           Learn React
         </a>
-        <button onClick={props.play2} >{props.paused?'>':'||'}</button>
+        <button onClick={props.togglePlay} >{props.playing?'>':'||'}</button>
       </header>
     </div>
   );

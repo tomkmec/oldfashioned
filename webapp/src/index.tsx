@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
+import { _inject } from './ui/main/PlaylistActions'
 
 import rootReducer from './ui/reducers'
 
@@ -14,29 +15,19 @@ import persistence from './persistence/localStorage'
 import {createStation} from './station'
 
 import thunkMiddleware from 'redux-thunk'
-import { createAsyncThunk } from '@reduxjs/toolkit';
 
 
 async function init() {
   const storedState = await persistence.loadState();
   const player = createStation(storedState);
+  _inject(player)
   
   const store = configureStore({
     reducer: rootReducer,
     middleware: [thunkMiddleware],
     preloadedState: storedState
   });
-/*  
-  const playThunk = createAsyncThunk('station/play', async() => {
-    console.log('p')
-    player.play()
-  })
 
-  createAsyncThunk('station/pause', async() => {
-    console.log('pa')
-    player.pause()
-  })
-*/
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>

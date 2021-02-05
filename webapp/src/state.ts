@@ -2,7 +2,7 @@ import * as api from './plugins/api'
 
 interface State {
   nowPlaying: {
-    paused: boolean,
+    playing: boolean,
     entry: api.PlaylistEntry
   },
   playlist: api.PlaylistEntry[],
@@ -19,7 +19,7 @@ interface State {
 
 const emptyState: State = {
   nowPlaying: {
-    paused: true,
+    playing: false,
     entry: {
       showInPlaylist: false,
       sourceId: '',

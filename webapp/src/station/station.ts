@@ -1,18 +1,20 @@
 import Station from '.';
 import State from '../state';
-import * as log from 'loglevel';
 
 export default class StationImpl implements Station {
+  private playing = false;
+
   constructor(previousState: State) {
 
   }
 
-  play() {
-    log.info("Play");
-  }
-
-  pause() {
-    log.info("Pause");
+  async delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
+  async togglePlay() {
+    await this.delay(500)
+    this.playing = !this.playing
+    return this.playing
   }
 
 }
